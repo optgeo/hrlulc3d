@@ -2,10 +2,7 @@ require 'yaml'
 require 'json'
 require './constants'
 
-#metadata = JSON.parse(File.open('docs/zxy/metadata.json').read)
-#center = metadata['center'].split(',').map {|v| v.to_f}
 center = [135.0, 35.0, 8]
-
 gsi_style = JSON.parse($stdin.read)
 
 style = <<-EOS
