@@ -12,6 +12,11 @@ zoom: #{center[2].to_i}
 sprite: #{gsi_style['sprite']}
 glyphs: #{gsi_style['glyphs']}
 sources: 
+  h:
+    type: raster-dem
+    url: "mapbox://mapbox.mapbox-terrain-dem-v1"
+    tileSize: 512
+    maxzoom: 14
   v: 
     type: vector
     minzoom: #{MINZOOM}
@@ -27,7 +32,14 @@ sources:
     tileSize: 256
     tiles:
       - https://maps.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg
+terrain:
+  source: h
 layers: 
+  -
+    id: sky
+    type: sky
+    paint: 
+      sky-type: atmosphere
   -
     id: background
     type: background
@@ -45,7 +57,7 @@ layers:
 EOS
 
 style = YAML.load(style)
-style['layers'][1]['paint']['fill-color'] = COLOR_MAP
+style['layers'][2]['paint']['fill-color'] = COLOR_MAP
 
 style['sources'].merge!(gsi_style['sources'])
 gsi_style['layers'].each {|layer|
